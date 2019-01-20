@@ -1,0 +1,4 @@
+Issues:
+Only one FC layer is used
+Only one RGB image is the input
+Likely overfitting to the dataset is occuring
