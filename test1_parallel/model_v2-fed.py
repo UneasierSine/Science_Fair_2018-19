@@ -49,51 +49,51 @@ def poolTransforms(datagen, df, directory):
         for round in dataset:
             values = round.next()
             if x == 0:
-                image = values[0]
+                image = [values[0]]
                 for i in values[1:]:
                     labels.append(i)
             else:
-                image = np.add(image, values[0])
+                image.append(values[0])
             x += 1
         yield(image, labels)
                 
 for i in range(7):
     #get directory of input images and create array of images and store images in the directory to the array
-    train_dir = "C:/pooled/Train"
+    train_dir = "C:/clumped_images/Train"
     #get labels pickle and convert to dataframe then sort by the filename to go along with the images
     train_labels_file = "C:/Users/panka/OneDrive/Desktop/Aditya/image data 2018-19/Training_Input_Resized.pkl"
 
     train_labels = pd.read_pickle(train_labels_file)
     train_datagen = ImageDataGenerator(rescale=1./255)
-    train_generator = train_datagen.flow_from_dataframe(dataframe=train_labels,directory=train_dir,target_size=(108,192),x_col='Filename',y_col=['Right Ankle x','Right Knee x','Right Hip x','Left Hip x','Left Knee x','Left Ankle x','Pelvis x','Thorax x','Upper Neck x','Head Top x','Right Wrist x','Right Elbow x','Right Shoulder x','Left Shoulder x','Left Elbow x','Left Wrist x','Right Ankle y','Right Knee y','Right Hip y','Left Hip y','Left Knee y','Left Ankle y','Pelvis y','Thorax y','Upper Neck y','Head Top y','Right Wrist y','Right Elbow y','Right Shoulder y','Left Shoulder y','Left Elbow y','Left Wrist y'],class_mode='other',batch_size=16)
+    train_generator = poolTransforms(train_datagen, train_labels,train_dir)
         
     #get directory of input images and create array of images and store images in the directory to the array
-    test_dir = "C:/pooled/Test"
+    test_dir = "C:/clumped_images/Test"
     #get labels pickle and convert to dataframe then sort by the filename to go along with the images
     test_labels_file = "C:/Users/panka/OneDrive/Desktop/Aditya/image data 2018-19/Testing_Input_Resized.pkl"
 
     test_labels = pd.read_pickle(test_labels_file)
     test_datagen = ImageDataGenerator(rescale=1./255)
-    test_generator = test_datagen.flow_from_dataframe(dataframe=test_labels,directory=test_dir,target_size=(108,192),x_col='Filename',y_col=['Right Ankle x','Right Knee x','Right Hip x','Left Hip x','Left Knee x','Left Ankle x','Pelvis x','Thorax x','Upper Neck x','Head Top x','Right Wrist x','Right Elbow x','Right Shoulder x','Left Shoulder x','Left Elbow x','Left Wrist x','Right Ankle y','Right Knee y','Right Hip y','Left Hip y','Left Knee y','Left Ankle y','Pelvis y','Thorax y','Upper Neck y','Head Top y','Right Wrist y','Right Elbow y','Right Shoulder y','Left Shoulder y','Left Elbow y','Left Wrist y'],class_mode='other',batch_size=16)
+    test_generator = poolTransforms(test_datagen, test_labels,test_dir)
     
     #create model
     model = Sequential()
 
     #add model layers
-    model.add(Conv2D(64, data_format="channels_last", kernel_size=3, input_shape=(108,192,3), activation='relu'))
-    model.add(Conv2D(64, kernel_size=3, activation='relu'))
-    model.add(Conv2D(64, kernel_size=3, activation='relu'))
+    model.add(Conv3D(64, data_format="channels_last", kernel_size=3, input_shape=(17,108,192,3), activation='relu'))
+    model.add(Conv3D(64, kernel_size=3, activation='relu'))
+    model.add(Conv3D(64, kernel_size=3, activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Conv2D(128, kernel_size=3, activation='relu'))
-    model.add(Conv2D(128, kernel_size=3, activation='relu'))
+    model.add(Conv3D(128, kernel_size=3, activation='relu'))
+    model.add(Conv3D(128, kernel_size=3, activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Conv2D(256, kernel_size=3, activation='relu'))
-    model.add(Conv2D(256, kernel_size=3, activation='relu'))
-    model.add(Conv2D(256, kernel_size=3, activation='relu'))
+    model.add(Conv3D(256, kernel_size=3, activation='relu'))
+    model.add(Conv3D(256, kernel_size=3, activation='relu'))
+    model.add(Conv3D(256, kernel_size=3, activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
-    model.add(Conv2D(512, kernel_size=3, activation='relu'))
-    model.add(Conv2D(512, kernel_size=3, activation='relu'))
-    model.add(Conv2D(512, kernel_size=3, activation='relu'))
+    model.add(Conv3D(512, kernel_size=3, activation='relu'))
+    model.add(Conv3D(512, kernel_size=3, activation='relu'))
+    model.add(Conv3D(512, kernel_size=3, activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(Flatten())
     model.add(Dense(1024, activation='relu'))
@@ -107,8 +107,8 @@ for i in range(7):
     model.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
 
     #train the model
-    STEP_SIZE_TRAIN = train_generator.n/16
-    STEP_SIZE_TEST = test_generator.n/16
+    STEP_SIZE_TRAIN = int(1369/16)
+    STEP_SIZE_TEST = int(3476/16)
     hist = model.fit_generator(train_generator,epochs=10,validation_data=test_generator, steps_per_epoch=STEP_SIZE_TRAIN, validation_steps=STEP_SIZE_TEST)
 
     #Show graph of validation and training loss
