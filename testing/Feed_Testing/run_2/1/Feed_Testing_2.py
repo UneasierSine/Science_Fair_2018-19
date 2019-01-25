@@ -113,7 +113,7 @@ plt.title('Training and validation loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
-lossStr = "loss.png"
+lossStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Feed_Testing/run_2/1/loss.png"
 plt.savefig(lossStr)
 plt.clf()
 
@@ -126,20 +126,20 @@ plt.title('Training and validation accuracy')
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend()
-accStr = "accuracy.png"
+accStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Feed_Testing/run_2/1/accuracy.png"
 plt.savefig(accStr)
 plt.clf()
 
-fileStr = "loss.json"
+fileStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Feed_Testing/run_2/1/loss.json"
 np_save = np.array(loss)
 np.savetxt(fileStr, np_save, delimiter=",")
-fileStr = "val_loss.json"
+fileStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Feed_Testing/run_2/1/val_loss.json"
 np_save = np.array(val_loss)
 np.savetxt(fileStr, np_save, delimiter=",")
-fileStr = "acc.json"
+fileStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Feed_Testing/run_2/1/acc.json"
 np_save = np.array(acc)
 np.savetxt(fileStr, np_save, delimiter=",")
-fileStr = "val_acc.json"
+fileStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Feed_Testing/run_2/1/val_acc.json"
 np_save = np.array(val_acc)
 np.savetxt(fileStr, np_save, delimiter=",")
 
