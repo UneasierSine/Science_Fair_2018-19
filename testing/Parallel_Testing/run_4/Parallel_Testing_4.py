@@ -22,7 +22,7 @@ baseKernels.append((1,-4,6,-4,1))
 baseKernels = np.array(baseKernels)
 
 def poolTransforms(datagen, df, directory):
-    dataset = [None]*1
+    dataset = [None]*17
     dataset[0] = datagen.flow_from_dataframe(dataframe=df,directory=directory,target_size=(108,192),x_col='Filename',y_col=['Right Ankle x','Right Knee x','Right Hip x','Left Hip x','Left Knee x','Left Ankle x','Pelvis x','Thorax x','Upper Neck x','Head Top x','Right Wrist x','Right Elbow x','Right Shoulder x','Left Shoulder x','Left Elbow x','Left Wrist x','Right Ankle y','Right Knee y','Right Hip y','Left Hip y','Left Knee y','Left Ankle y','Pelvis y','Thorax y','Upper Neck y','Head Top y','Right Wrist y','Right Elbow y','Right Shoulder y','Left Shoulder y','Left Elbow y','Left Wrist y'],class_mode='other',batch_size=16)
     dataset[1] = datagen.flow_from_dataframe(dataframe=df,directory=directory,target_size=(108,192),x_col='_00',y_col=['Right Ankle x','Right Knee x','Right Hip x','Left Hip x','Left Knee x','Left Ankle x','Pelvis x','Thorax x','Upper Neck x','Head Top x','Right Wrist x','Right Elbow x','Right Shoulder x','Left Shoulder x','Left Elbow x','Left Wrist x','Right Ankle y','Right Knee y','Right Hip y','Left Hip y','Left Knee y','Left Ankle y','Pelvis y','Thorax y','Upper Neck y','Head Top y','Right Wrist y','Right Elbow y','Right Shoulder y','Left Shoulder y','Left Elbow y','Left Wrist y'],class_mode='other',batch_size=16)
     dataset[2] = datagen.flow_from_dataframe(dataframe=df,directory=directory,target_size=(108,192),x_col='_01',y_col=['Right Ankle x','Right Knee x','Right Hip x','Left Hip x','Left Knee x','Left Ankle x','Pelvis x','Thorax x','Upper Neck x','Head Top x','Right Wrist x','Right Elbow x','Right Shoulder x','Left Shoulder x','Left Elbow x','Left Wrist x','Right Ankle y','Right Knee y','Right Hip y','Left Hip y','Left Knee y','Left Ankle y','Pelvis y','Thorax y','Upper Neck y','Head Top y','Right Wrist y','Right Elbow y','Right Shoulder y','Left Shoulder y','Left Elbow y','Left Wrist y'],class_mode='other',batch_size=16)
@@ -120,7 +120,7 @@ plt.title('Training and validation loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
-lossStr = "loss.png"
+lossStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Parallel_Testing/run_4/1/loss.png"
 plt.savefig(lossStr)
 plt.clf()
 
@@ -133,20 +133,20 @@ plt.title('Training and validation accuracy')
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend()
-accStr = "accuracy.png"
+accStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Parallel_Testing/run_4/1/accuracy.png"
 plt.savefig(accStr)
 plt.clf()
 
-fileStr = "loss.json"
+fileStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Parallel_Testing/run_4/1/loss.json"
 np_save = np.array(loss)
 np.savetxt(fileStr, np_save, delimiter=",")
-fileStr = "val_loss.json"
+fileStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Parallel_Testing/run_4/1/val_loss.json"
 np_save = np.array(val_loss)
 np.savetxt(fileStr, np_save, delimiter=",")
-fileStr = "acc.json"
+fileStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Parallel_Testing/run_4/1/acc.json"
 np_save = np.array(acc)
 np.savetxt(fileStr, np_save, delimiter=",")
-fileStr = "val_acc.json"
+fileStr = "C:/Users/panka/Desktop/Science_Fair_2018-19/testing/Parallel_Testing/run_4/1/val_acc.json"
 np_save = np.array(val_acc)
 np.savetxt(fileStr, np_save, delimiter=",")
 
