@@ -110,7 +110,7 @@ plt.title('Training and validation loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend()
-lossStr = "loss.png"
+lossStr = os.getcwd() + "loss.png"
 plt.savefig(lossStr)
 plt.clf()
 
@@ -123,20 +123,20 @@ plt.title('Training and validation accuracy')
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend()
-accStr = "accuracy.png"
+accStr = os.getcwd() + "accuracy.png"
 plt.savefig(accStr)
 plt.clf()
 
-fileStr = "loss.json"
+fileStr = os.getcwd() + "loss.json"
 np_save = np.array(loss)
 np.savetxt(fileStr, np_save, delimiter=",")
-fileStr = "val_loss.json"
+fileStr = os.getcwd() + "val_loss.json"
 np_save = np.array(val_loss)
 np.savetxt(fileStr, np_save, delimiter=",")
-fileStr = "acc.json"
+fileStr = os.getcwd() + "acc.json"
 np_save = np.array(acc)
 np.savetxt(fileStr, np_save, delimiter=",")
-fileStr = "val_acc.json"
+fileStr = os.getcwd() + "val_acc.json"
 np_save = np.array(val_acc)
 np.savetxt(fileStr, np_save, delimiter=",")
 
