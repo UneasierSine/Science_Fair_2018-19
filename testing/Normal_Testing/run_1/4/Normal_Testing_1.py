@@ -92,7 +92,7 @@ accStr = os.getcwd() + "accuracy.png"
 plt.savefig(accStr)
 plt.clf()
 
-fileStr = os.getcwd() + "loss.json"
+fileStr = "loss.json"
 np_save = np.array(loss)
 np.savetxt(fileStr, np_save, delimiter=",")
 fileStr = os.getcwd() + "val_loss.json"
